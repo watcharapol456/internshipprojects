@@ -5,6 +5,8 @@ import {
     text,
     primaryKey,
     integer,
+    serial,
+    varchar,
   } from "drizzle-orm/pg-core"
   import type { AdapterAccountType } from "next-auth/adapters"
    
@@ -86,3 +88,4 @@ import {
       }),
     })
   )
+

@@ -9,7 +9,7 @@ export default function RegisterPage() {
 
     
   return (
-    <div className='bg-red-500 h-full w-full'>
+    <div className='"h-full flex justify-center items-center bg-[#67e8f9]'>
         <RegisterForm />
        
     </div>

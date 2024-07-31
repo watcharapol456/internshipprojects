@@ -2,7 +2,7 @@
 
 import { RegisterSchema, users } from "@/db/schema";
 import * as z from "zod";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import db from "@/db";
 import { eq,or } from "drizzle-orm";
 
@@ -17,6 +17,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
     email: vEmail,
     password: vPassword,
     username: vUser,
+    name : Vname
   } = validatedFields.data;
 
   const hashedPassword = await bcrypt.hash(vPassword, 10);
@@ -25,7 +26,8 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
   const existingUser = await db.query.users.findMany({
     where: (users, { eq, or }) => or(
       eq(users.email, vEmail),
-      eq(users.username, vUser)
+      eq(users.username, vUser),
+      eq(users.name,Vname),
     ),
   });
   
@@ -44,6 +46,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
   await db.insert(users).values({
     username: vUser,
     email: vEmail,
+    name: Vname ,
     password: hashedPassword,
   });
 

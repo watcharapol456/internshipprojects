@@ -1,16 +1,12 @@
-'use client'
-import React from 'react'
+"use client";
+import React from "react";
 
-
-import { CardWrapper } from '@/components/ui/Login/card-wrapper'
-import { LoginForm } from '@/components/ui/Login/login-from'
+import { LoginForm } from "@/components/ui/Login/login-from";
 export default function LoginPage() {
-
-    
   return (
-    <div className='bg-red-500 h-full w-full'>
-        <LoginForm></LoginForm>
-       
+    <div className="h-full flex justify-center items-center bg-[#67e8f9]">
+      <LoginForm />
+
     </div>
-  )
+  );
 }
