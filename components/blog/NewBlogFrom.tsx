@@ -5,17 +5,6 @@ import { Button } from "../ui/button";
 import { createPost } from "@/actions/action.blog";
 
 import { UploadButton } from "@/utlis/uploadthing";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
 import Link from "next/link";
 
 export const NewBlogForm = () => {
@@ -77,29 +66,17 @@ export const NewBlogForm = () => {
           }}
         />
         <div className="flex justify-center h-12 w-full">
-          <AlertDialog>
-            <AlertDialogTrigger asChild>
-              <Button
+        
+        <Link href={'/myblog'}>
+        <Button
                 className=" h-full text-2xl font-bold w-[450px] "
                 type="submit"
               >
                 Submit
               </Button>
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                <AlertDialogDescription>
-                  This action cannot be undone. This will permanently delete
-                  your account and remove your data from our servers.
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction><Link href={'/'}>Continue</Link></AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
+  
+        </Link>
+        
         </div>
       </form>
     </div>

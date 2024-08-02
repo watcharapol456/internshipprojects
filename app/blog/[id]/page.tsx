@@ -19,7 +19,6 @@ const Page = async ({ params }: { params: { id: string } }) => {
       } else {
         return (
           <div>
-         
             {blogs.map((blog) => (
               <div
                 key={blog.id}
@@ -34,6 +33,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
                       alt={blog.title}
                       className="object-fill"
                     />
+                   
                   </div>
                   <div className="mt-5">
                     <h2 className="text-xl font-bold">{blog.title}</h2>

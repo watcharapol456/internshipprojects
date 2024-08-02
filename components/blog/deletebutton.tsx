@@ -37,7 +37,7 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ postId }) => {
     <button
       onClick={handleBothClicks}
       
-      className="bg-red-500 text-white px-4 py-2 rounded"
+      className="bg-red-500 text-white px-4 py-2 rounded w-32"
     >
       Delete
     </button>

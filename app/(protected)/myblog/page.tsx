@@ -1,7 +1,7 @@
 import db from "@/db";
 import { blogUser } from "@/db/schema";
 import { auth } from "@/auth";
-import { eq } from "drizzle-orm";
+import { eq , desc } from "drizzle-orm";
 import DeleteButton from "@/components/blog/deletebutton";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -26,10 +26,12 @@ const MyBlogPage = async () => {
     }
 
     const userBlogs = await db
-      .select()
-      .from(blogUser)
-      .where(eq(blogUser.username, username))
-      .execute();
+    .select()
+    .from(blogUser)
+    .where(eq(blogUser.username, username))
+    .orderBy(desc(blogUser.id))
+    .execute();
+  
 
     console.log("Fetched blogs:", userBlogs);
 
@@ -76,10 +78,10 @@ const MyBlogPage = async () => {
                 />
               )}
               <div className="mt-4">
-                <DeleteButton postId={blog.id ?? 0} />
-                
-                <Link href={`/myblog/${blog.id}`}>
-                <Button>Edit</Button>
+                <DeleteButton postId={blog.id ?? 0}  />
+
+                <Link href={`/myblog/${blog.id}`} className="ml-5 ">
+                <Button className="w-32 bg-green-500 hover:bg-green-700">Edit</Button>
                 </Link>
                
               </div>

@@ -3,6 +3,7 @@ import { db } from "@/db";
 import { blog } from "@/db/schema";
 import { auth } from "@/auth";
 import { eq } from "drizzle-orm";
+import { redirect } from "next/navigation";
 
 interface Post {
   title: string;
@@ -49,9 +50,48 @@ export async function deletePost(postId: number) {
   }
 }
 
-// export async function editPost(editpost : postupdate) {
-//     try {
-//       const updatePost = await db.update(blog)
-//       .set({title :  })
-//     }
-// }
+export async function getBlog(id: string) {
+  const numberPattern = /^\d+$/;
+  if(numberPattern.test(id)){
+    const paramnum = Number(id)
+    try {
+      const blogs = await db.select().from(blog).where(eq(blog.id, paramnum));
+      return blogs[0];
+
+    } catch (error) {
+      console.error("Error querying blog:", error);
+      throw error;
+    }
+  }else{
+    redirect('/')
+  }
+  
+}
+
+interface editPosts {
+  title: string;
+  description: string;
+  image?: string;
+}
+
+export async function editPost (updatepost: editPosts ,id:string) {
+  const numberPattern = /^\d+$/;
+  if(numberPattern.test(id)){
+    const paramnum = Number(id)
+    try{
+      const editPost = await db.update(blog).set(
+        {
+          title: updatepost.title,
+          description : updatepost.description,
+          image : updatepost.image
+        }
+      )
+      .where(eq(blog.id,paramnum));
+     }catch (error){
+        console.error("[DEBUG],error update blog",error)
+     }
+  }else{
+    redirect('/')
+  }
+  
+} 
