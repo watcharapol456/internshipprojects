@@ -50,21 +50,18 @@ export const NewBlogForm = () => {
           onChange={(e) => setContent(e.target.value)}
           placeholder="Content"
         ></textarea>
-        <UploadButton
-          className="mt-5"
-          endpoint="imageUploader"
-          onClientUploadComplete={(res) => {
-            console.log("Files: ", res);
-            if (res && res.length > 0) {
-              console.log("Selected file URL: ", res[0].url);
-              setThumbnail(res[0].url);
-            }
-            console.log("Thumbnail before submission: ", thumbnail);
-          }}
-          onUploadError={(error: Error) => {
-            console.log("error ", error);
-          }}
-        />
+         <UploadButton
+        endpoint="imageUploader"
+        onClientUploadComplete={(res) => {
+          // Do something with the response
+          console.log("Files: ", res);
+          alert("Upload Completed");
+        }}
+        onUploadError={(error: Error) => {
+          // Do something with the error.
+          alert(`ERROR! ${error.message}`);
+        }}
+      />
         <div className="flex justify-center h-12 w-full">
         
         <Link href={'/myblog'}>

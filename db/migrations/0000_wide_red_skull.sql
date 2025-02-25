@@ -37,7 +37,9 @@ CREATE TABLE IF NOT EXISTS "user" (
 	"name" text,
 	"email" text NOT NULL,
 	"emailVerified" timestamp,
-	"image" text
+	"image" text,
+	"username" text NOT NULL,
+	"password" text NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "verificationToken" (
@@ -46,9 +48,16 @@ CREATE TABLE IF NOT EXISTS "verificationToken" (
 	"expires" timestamp NOT NULL,
 	CONSTRAINT "verificationToken_identifier_token_pk" PRIMARY KEY("identifier","token")
 );
-
-
-
+--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "blogs" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"title" varchar(256) NOT NULL,
+	"description" text NOT NULL,
+	"image" text,
+	"published" boolean DEFAULT false,
+	"name" varchar(255),
+	"userid" varchar(255)
+);
 --> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "account" ADD CONSTRAINT "account_userId_user_id_fk" FOREIGN KEY ("userId") REFERENCES "public"."user"("id") ON DELETE cascade ON UPDATE no action;
